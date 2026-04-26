@@ -6,13 +6,30 @@
         <Icon icon="lucide:music" width="48" height="48" />
       </div>
       <p>No local files scanned yet.</p>
-      <button class="action-btn">Scan Folder</button>
+      <button class="action-btn" @click="handleScanFolder">Scan Folder</button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
+import { MessagePlugin } from 'tdesign-vue-next';
+
+const handleScanFolder = async () => {
+  try {
+    if (window.electronAPI?.selectDirectory) {
+      const folderPath = await window.electronAPI.selectDirectory();
+      if (folderPath) {
+        MessagePlugin.success(`已选择文件夹: ${folderPath}`);
+      }
+    } else {
+      MessagePlugin.warning('当前环境不支持文件夹选择');
+    }
+  } catch (error) {
+    MessagePlugin.error('选择文件夹时出错');
+    console.error(error);
+  }
+};
 </script>
 
 <style scoped>

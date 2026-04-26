@@ -33,7 +33,7 @@
         <Icon icon="lucide:clock" class="nav-icon" />
         <span class="nav-text">最近播放</span>
       </router-link>
-      <div class="nav-item">
+      <div class="nav-item" @click="handleDownloadManager">
         <Icon icon="lucide:download" class="nav-icon" />
         <span class="nav-text">下载管理</span>
       </div>
@@ -53,25 +53,25 @@
       </div>
       
       <div class="playlists-list" v-show="isPlaylistsOpen">
-        <div class="nav-item playlist-item">
+        <div class="nav-item playlist-item" @click="handlePlaylistClick('driving')">
           <div class="playlist-cover">
             <Icon icon="lucide:music" />
           </div>
           <span class="nav-text">驾驶模式</span>
         </div>
-        <div class="nav-item playlist-item">
+        <div class="nav-item playlist-item" @click="handlePlaylistClick('relax')">
           <div class="playlist-cover">
             <Icon icon="lucide:music" />
           </div>
           <span class="nav-text">放松时光</span>
         </div>
-        <div class="nav-item playlist-item">
+        <div class="nav-item playlist-item" @click="handlePlaylistClick('focus')">
           <div class="playlist-cover">
             <Icon icon="lucide:music" />
           </div>
           <span class="nav-text">工作专注</span>
         </div>
-        <div class="nav-item create-playlist">
+        <div class="nav-item create-playlist" @click="handleCreatePlaylist">
           <Icon icon="lucide:plus" class="nav-icon" />
           <span class="nav-text">新建歌单</span>
         </div>
@@ -83,11 +83,29 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Icon } from '@iconify/vue';
+import { MessagePlugin } from 'tdesign-vue-next';
 
 const isPlaylistsOpen = ref(true);
 
 const togglePlaylists = () => {
   isPlaylistsOpen.value = !isPlaylistsOpen.value;
+};
+
+const handleDownloadManager = () => {
+  MessagePlugin.info('打开下载管理');
+};
+
+const handlePlaylistClick = (type: string) => {
+  const names: Record<string, string> = {
+    driving: '驾驶模式',
+    relax: '放松时光',
+    focus: '工作专注'
+  };
+  MessagePlugin.info(`打开歌单: ${names[type]}`);
+};
+
+const handleCreatePlaylist = () => {
+  MessagePlugin.info('创建新歌单');
 };
 </script>
 

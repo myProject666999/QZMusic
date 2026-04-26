@@ -11,7 +11,7 @@
           <div class="banner-info">
             <h2 class="banner-title">每日推荐</h2>
             <p class="banner-desc">根据你的音乐口味，为你精选30首歌曲</p>
-            <button class="play-btn">
+            <button class="play-btn" @click="handlePlayDaily">
               <Icon icon="lucide:play" class="play-icon" />
               立即播放
             </button>
@@ -23,10 +23,10 @@
       <div class="section">
         <div class="section-header">
           <h3 class="section-title">推荐歌单</h3>
-          <button class="more-btn">更多</button>
+          <button class="more-btn" @click="handleMorePlaylists">更多</button>
         </div>
         <div class="playlist-grid">
-          <div class="playlist-card" v-for="i in 6" :key="i">
+          <div class="playlist-card" v-for="i in 6" :key="i" @click="handlePlaylistClick(i)">
             <div class="playlist-cover">
               <div class="cover-gradient"></div>
               <div class="play-overlay">
@@ -45,10 +45,10 @@
       <div class="section">
         <div class="section-header">
           <h3 class="section-title">热门歌手</h3>
-          <button class="more-btn">更多</button>
+          <button class="more-btn" @click="handleMoreArtists">更多</button>
         </div>
         <div class="artist-grid">
-          <div class="artist-card" v-for="i in 8" :key="i">
+          <div class="artist-card" v-for="i in 8" :key="i" @click="handleArtistClick(i)">
             <div class="artist-avatar">
               <div class="avatar-gradient"></div>
             </div>
@@ -61,10 +61,10 @@
       <div class="section">
         <div class="section-header">
           <h3 class="section-title">新歌速递</h3>
-          <button class="more-btn">播放全部</button>
+          <button class="more-btn" @click="handlePlayAllSongs">播放全部</button>
         </div>
         <div class="song-list">
-          <div class="song-item" v-for="i in 10" :key="i">
+          <div class="song-item" v-for="i in 10" :key="i" @click="handleSongClick(i)">
             <div class="song-index">{{ i }}</div>
             <div class="song-cover">
               <div class="cover-gradient"></div>
@@ -84,6 +84,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { Icon } from '@iconify/vue';
+import { MessagePlugin } from 'tdesign-vue-next';
 
 const currentDate = computed(() => {
   const now = new Date();
@@ -92,6 +93,34 @@ const currentDate = computed(() => {
     month: now.getMonth() + 1
   };
 });
+
+const handlePlayDaily = () => {
+  MessagePlugin.info('正在播放每日推荐...');
+};
+
+const handleMorePlaylists = () => {
+  MessagePlugin.info('查看更多推荐歌单');
+};
+
+const handlePlaylistClick = (index: number) => {
+  MessagePlugin.info(`打开歌单: 精选歌单 ${index}`);
+};
+
+const handleMoreArtists = () => {
+  MessagePlugin.info('查看更多热门歌手');
+};
+
+const handleArtistClick = (index: number) => {
+  MessagePlugin.info(`查看歌手: 歌手 ${index}`);
+};
+
+const handlePlayAllSongs = () => {
+  MessagePlugin.info('正在播放新歌速递全部歌曲');
+};
+
+const handleSongClick = (index: number) => {
+  MessagePlugin.info(`播放歌曲: 歌曲名称 ${index}`);
+};
 </script>
 
 <style scoped>
