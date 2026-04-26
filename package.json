@@ -1,0 +1,77 @@
+{
+  "name": "qzmusic",
+  "private": true,
+  "author": "lqtmcstudio",
+  "description": "QZMusic - 简洁、美观、拓展性强的音乐播放器",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "electron:build": "electron-vite build && electron-builder --win --x64 --config --publish never"
+  },
+  "dependencies": {
+    "@applemusic-like-lyrics/core": "^0.2.0",
+    "@applemusic-like-lyrics/lyric": "^0.3.0",
+    "@applemusic-like-lyrics/vue": "^0.2.0",
+    "@electron-toolkit/tsconfig": "^2.0.0",
+    "@iconify/vue": "^5.0.0",
+    "@pixi/app": "^7.4.3",
+    "@pixi/core": "^7.4.3",
+    "@pixi/display": "^7.4.3",
+    "@pixi/filter-blur": "^7.4.3",
+    "@pixi/filter-bulge-pinch": "^5.1.1",
+    "@pixi/filter-color-matrix": "^7.4.3",
+    "@pixi/sprite": "^7.4.3",
+    "@vitejs/plugin-vue-jsx": "^5.1.4",
+    "element-plus": "^2.13.0",
+    "jss": "^10.10.0",
+    "jss-preset-default": "^10.10.0",
+    "pinia": "^3.0.4",
+    "tdesign-vue-next": "^1.18.2",
+    "url": "^0.11.4",
+    "vite-plugin-wasm": "^3.5.0",
+    "vue": "^3.4.21",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "electron": "^30.0.1",
+    "electron-builder": "^24.13.3",
+    "electron-vite": "^5.0.0",
+    "sass-embedded": "^1.97.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.6",
+    "vite-plugin-node-polyfills": "^0.25.0",
+    "vite-svg-loader": "^5.1.0",
+    "vue-tsc": "^2.0.26"
+  },
+  "main": "out/main/index.js",
+  "build": {
+    "productName": "QZMusic",
+    "appId": "love.qz.music",
+    "asar": true,
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "public/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    },
+    "extraResources": [
+      {
+        "from": "core/qzplayer.exe",
+        "to": "core/qzplayer.exe"
+      },
+      {
+        "from": "core/libfftw3f-3.dll",
+        "to": "core/libfftw3f-3.dll"
+      }
+    ]
+  }
+}
