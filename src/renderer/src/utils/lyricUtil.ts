@@ -42,8 +42,11 @@ interface LyricData {
     lrc?: string,
     qrc?: string
 }
-export function parseLyric(lyric: LyricData):LyricLine[] {
-    let parsed:LyricLine[] = []
+export function parseLyric(lyric: LyricData | null | undefined): LyricLine[] {
+    let parsed: LyricLine[] = [];
+    if (!lyric) {
+        return sanitizeLyricLines(parsed);
+    }
     if (lyric.ttml != undefined) {
         parsed = parseTTML(lyric.ttml).lines;
     } else if (lyric.yrc != undefined) {
@@ -51,7 +54,7 @@ export function parseLyric(lyric: LyricData):LyricLine[] {
     } else if (lyric.lrc != undefined) {
         parsed = parseLrc(lyric.lrc);
     } else if (lyric.qrc != undefined) {
-        parsed = parseQrc(lyric.qrc)
+        parsed = parseQrc(lyric.qrc);
     }
     return sanitizeLyricLines(parsed);
 }

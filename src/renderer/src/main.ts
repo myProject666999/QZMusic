@@ -34,6 +34,26 @@ const router = createRouter({
       path: '/search',
       name: 'Search',
       component: () => import('./views/Search.vue')
+    },
+    {
+      path: '/download',
+      name: 'Download',
+      component: () => import('./views/DownloadManager.vue')
+    },
+    {
+      path: '/playlist/:id',
+      name: 'PlaylistDetail',
+      component: () => import('./views/Playlist.vue')
+    },
+    {
+      path: '/driving',
+      name: 'Driving',
+      component: () => import('./views/DrivingMode.vue')
+    },
+    {
+      path: '/relax',
+      name: 'Relax',
+      component: () => import('./views/RelaxMode.vue')
     }
   ]
 })
